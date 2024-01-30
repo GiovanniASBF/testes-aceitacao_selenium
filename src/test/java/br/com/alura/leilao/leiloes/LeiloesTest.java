@@ -36,7 +36,15 @@ public class LeiloesTest {
         String valor = "500.00";
 
         this.paginaDeLeiloes = paginaDeCadastro.cadastrarLeilao(nome, valor, data);
-        Assert.assertTrue(paginaDeLeiloes.isLeilaoCadastrado(nome, valor, data));
+        Assertions.assertTrue(paginaDeLeiloes.isLeilaoCadastrado(nome, valor, data));
+    }
+
+    @Test
+    public void deveriaValidarCadastroDeLeilao(){
+        this.paginaDeLeiloes = paginaDeCadastro.cadastrarLeilao("", "", "");
+
+        Assertions.assertTrue(this.paginaDeLeiloes.isPaginaAtual());
+        Assertions.assertTrue(this.paginaDeCadastro.isMensagensDeValidacaoVisiveis());
     }
 
 }

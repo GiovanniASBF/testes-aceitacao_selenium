@@ -23,4 +23,12 @@ public class CadastroLeilaoPage {
 
         return new LeiloesPage(browser);
     }
+
+    public boolean isMensagensDeValidacaoVisiveis() {
+        String PageSource = browser.getPageSource();
+        return PageSource.contains("minimo 3 caracteres")
+                && PageSource.contains("não deve estar em branco")
+                && PageSource.contains("deve ser um valor maior de 0.1")
+                && PageSource.contains("deve ser uma data no formato dd/MM/yyyy");
+    }
 }
