@@ -13,8 +13,15 @@ import java.time.format.DateTimeFormatter;
 public class LeiloesTest {
 
     private LeiloesPage paginaDeLeiloes;
+    private CadastroLeilaoPage paginaDeCadastro;
 
-
+    @BeforeEach
+    public void beforeEach(){
+        LoginPage paginaDeLogin = new LoginPage();
+        paginaDeLogin.preencheFormularioDeLogin("fulano", "pass");
+        this.paginaDeLeiloes = paginaDeLogin.efetuaLogin();
+        this.paginaDeCadastro = paginaDeLeiloes.carregarFormulario();
+    }
     @AfterEach
     public void afterEach(){
         this.paginaDeLeiloes.fecharNavegador();
@@ -22,10 +29,7 @@ public class LeiloesTest {
 
     @Test
     public void deveriaCadastrarLeilao(){
-        LoginPage paginaDeLogin = new LoginPage();
-        paginaDeLogin.preencheFormularioDeLogin("fulano", "pass");
-        this.paginaDeLeiloes = paginaDeLogin.efetuaLogin();
-        CadastroLeilaoPage paginaDeCadastro = paginaDeLeiloes.carregarFormulario();
+
 
         String data = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String nome = "Leilao do dia" + data;
